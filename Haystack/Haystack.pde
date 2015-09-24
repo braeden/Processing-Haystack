@@ -1,5 +1,5 @@
 void setup() {
-  int seed = 0; // TRY DIFFERENT SEED VALUES
+  int seed = 1234; // TRY DIFFERENT SEED VALUES
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
@@ -42,10 +42,13 @@ int[] generateHaystack(int size, int seed) {
   return(numbers);
 }
 
+//we're going to use quicksort, which has an average case of O(nlogn)
+//Use the Hoar Partition Scheme, as seen here https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
 void sortHaystack(int[] haystack) {
   // YOUR CODE GOES HERE
 }
 
+//this needs to be a recursive binary search
 boolean searchHaystack(int needle, int[] haystack) {
   // Linear Search Implementation (REMOVE ONCE YOU UNDERSTAND)
   for (int i=0; i < haystack.length; i++) {
