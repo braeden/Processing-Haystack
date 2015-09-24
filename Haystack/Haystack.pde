@@ -50,7 +50,6 @@ void sortHaystack(int[] haystack) {
 
 //this needs to be a recursive binary search
 boolean searchHaystack(int needle, int[] haystack) {
-  // Linear Search Implementation (REMOVE ONCE YOU UNDERSTAND)
   for (int i=0; i < haystack.length; i++) {
     if (haystack[i] == needle)
       return(true);
