@@ -1,5 +1,6 @@
+
 void setup() {
-  int seed = 1234; // TRY DIFFERENT SEED VALUES
+  int seed = 1; // TRY DIFFERENT SEED VALUES
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
@@ -8,11 +9,11 @@ void setup() {
   println("Search haystack " + t_count + " times.");
   
   for(int i=0; i<t_count; i++) {
-    int haystack[] = generateHaystack(10000000, seed);
+    int haystack[] = generateHaystack(10000, seed);
   
     long t = System.nanoTime();
     sortHaystack(haystack);
-    found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
+   // found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
     if(i >= 3) // the earlier times are sometimes corrupted by memory mamangement and system processes
@@ -45,9 +46,20 @@ int[] generateHaystack(int size, int seed) {
 //we're going to use quicksort, which has an average case of O(nlogn)
 //Use the Hoar Partition Scheme, as seen here https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
 void sortHaystack(int[] haystack) {
-  // YOUR CODE GOES HERE
+  int store;
+  int l = haystack.length;
+  for (int i = l; i >= 0; i--) {
+    for (int j = 0; j < l - 1; j++) {
+      if (haystack[j] > haystack[j+1]) {
+        store = haystack[j];
+        haystack[j] = haystack[j+1];
+        haystack[j+1] = store;
+      }
+    }
+  }
 }
 
+/*
 //this needs to be a recursive binary search
 boolean searchHaystack(int needle, int[] haystack) {
   for (int i=0; i < haystack.length; i++) {
@@ -57,4 +69,4 @@ boolean searchHaystack(int needle, int[] haystack) {
   return(false);
   
   // YOUR CODE GOES HERE
-}
+}*/
