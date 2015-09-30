@@ -13,13 +13,10 @@ void setup() {
   
     long t = System.nanoTime();
     sortHaystack(haystack);
-   // found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
-    int haystack[] = generateHaystack(1000, seed);
-  
-    long t = System.nanoTime();
+   // found_the_needle = searchHaystack(42, haystack); // deep philosophical search... 
     sortHaystack(haystack);
     println(haystack);
-    found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
+    //found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
     if(i >= 3) // the earlier times are sometimes corrupted by memory mamangement and system processes
@@ -51,7 +48,7 @@ int[] generateHaystack(int size, int seed) {
 
 //we're going to use quicksort, which has an average case of O(nlogn)
 //Use the Hoar Partition Scheme, as seen here https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
-void sortHaystack(int[] haystack) {
+void bubbleHaystack(int[] haystack) {
   int store;
   int l = haystack.length;
   for (int i = l; i >= 0; i--) {
@@ -63,6 +60,7 @@ void sortHaystack(int[] haystack) {
       }
     }
   }
+}
 void countSort(int[] arr, int n, int exp)
 {
   int[] count = new int[n+1];
