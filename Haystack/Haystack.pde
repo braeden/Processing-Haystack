@@ -4,7 +4,7 @@ void setup() {
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
-  int t_count = 10; // increase for greater accuracy at a trade off of time
+  int t_count = 1; // increase for greater accuracy at a trade off of time
   
   println("Search haystack " + t_count + " times.");
   
@@ -14,6 +14,12 @@ void setup() {
     long t = System.nanoTime();
     sortHaystack(haystack);
    // found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
+    int haystack[] = generateHaystack(1000, seed);
+  
+    long t = System.nanoTime();
+    sortHaystack(haystack);
+    println(haystack);
+    found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
     if(i >= 3) // the earlier times are sometimes corrupted by memory mamangement and system processes
@@ -57,6 +63,36 @@ void sortHaystack(int[] haystack) {
       }
     }
   }
+void countSort(int[] arr, int n, int exp)
+{
+  int[] count = new int[n+1];
+  int[] output = new int[n];
+  
+  int i = 0;
+    
+  for(i = 0; i < n; ++i)
+    ++count[(arr[i] / exp) % 10];
+    
+  for (i = 1; i <= n; ++i)
+    count[i] += count[i-1];
+    
+  for (i = n - 1; i >= 0; --i)
+  {
+    output[count[(arr[i] / exp) % 10]-1] = arr[i];
+    --count[(arr[i] / exp) % 10];
+  }
+  
+  for (i = 0; i < n; ++i)
+    arr[i] = output[i];  
+}
+
+//radix sort
+void sortHaystack(int[] haystack) 
+{
+  int max = 1000;
+  
+  for (int e = 1; max/e > 0; e *= 10)
+    countSort(haystack, max, e);
 }
 
 /*
