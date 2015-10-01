@@ -75,18 +75,14 @@ void sortHaystack(int[] haystack)
 
 
 boolean binarySearch(int e, int[] haystack) {
-//Wrote recursivley, proccessing couldn't deal with so many self calls.
-  int minval = 0;
-  int maxval = 999999; //Fixed num for speed:haystack.length-1
-  while (minval <= maxval) {
-    int midval = (maxval+minval)/2;
-    if (e < haystack[midval]) {
-      maxval = midval - 1; //offset max, keeps from looping on value
-    } else if (e > haystack[midval]) {
-      minval = midval + 1; //offset min, so algortithm continues
-    } else if (e == haystack[midval]){
-      return true;
-    }
+  int a = 0;
+  int c = 999999;
+  int b;
+  while (a <= c) {
+    b = (c+a)/2;
+    if (e < haystack[b]) { c = b - 1; } 
+    else if (e > haystack[b]) { a = a + 1; }
+    else if (e == haystack[b]){ return true; }
   }
   return false;
 }
