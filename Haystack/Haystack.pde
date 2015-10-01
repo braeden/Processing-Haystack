@@ -1,6 +1,6 @@
 
 void setup() {
-  int seed = 3; // TRY DIFFERENT SEED VALUES
+  int seed = 0; // TRY DIFFERENT SEED VALUES
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
@@ -9,9 +9,12 @@ void setup() {
   println("Search haystack " + t_count + " times.");
   
   for(int i=0; i<t_count; i++) {
+    
     int haystack[] = generateHaystack(10000000, seed);
-    long t = System.nanoTime();
     sortHaystack(haystack);
+     
+    long t = System.nanoTime();
+ 
     found_the_needle = binarySearch(42, haystack); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
@@ -81,7 +84,7 @@ boolean binarySearch(int e, int[] haystack) {
   while (a <= c) {
     b = (c+a)/2;
     if (e < haystack[b]) { c = b - 1; } 
-    else if (e > haystack[b]) { a = a + 1; }
+    else if (e > haystack[b]) { a = b + 1; }
     else if (e == haystack[b]){ return true; }
   }
   return false;
