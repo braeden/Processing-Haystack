@@ -4,16 +4,16 @@ void setup() {
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
-  int t_count = 3; // increase for greater accuracy at a trade off of time
+  int t_count = 4; // increase for greater accuracy at a trade off of time
   
   println("Search haystack " + t_count + " times.");
   
   for(int i=0; i<t_count; i++) {
     int haystack[] = generateHaystack(10000000, seed);
-  
+    thread("sortHaystack(int[] haystack)");
     long t = System.nanoTime();
     sortHaystack(haystack);
-    found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
+    found_the_needle = binarySearch(42, haystack); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
     if(i >= 3) // the earlier times are sometimes corrupted by memory mamangement and system processes
@@ -41,22 +41,6 @@ int[] generateHaystack(int size, int seed) {
   }
   
   return(numbers);
-}
-
-//we're going to use quicksort, which has an average case of O(nlogn)
-//Use the Hoar Partition Scheme, as seen here https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
-void bubbleHaystack(int[] haystack) {
-  int store;
-  int l = haystack.length;
-  for (int i = l; i >= 0; i--) {
-    for (int j = 0; j < l - 1; j++) {
-      if (haystack[j] > haystack[j+1]) {
-        store = haystack[j];
-        haystack[j] = haystack[j+1];
-        haystack[j+1] = store;
-      }
-    }
-  }
 }
 void countSort(int[] arr, int n, int exp)
 {
@@ -91,13 +75,19 @@ void sortHaystack(int[] haystack)
 }
 
 
-//this needs to be a recursive binary search
-boolean searchHaystack(int needle, int[] haystack) {
-  for (int i=0; i < haystack.length; i++) {
-    if (haystack[i] == needle)
-      return(true);
+boolean binarySearch(int e, int[] haystack) {
+//Wrote recursivley, proccessing couldn't deal with so many self calls.
+  int minval = 0;
+  int maxval = 999999; //Fixed num for speed:haystack.length-1
+  while (minval <= maxval) {
+    int midval = (maxval+minval)/2;
+    if (e < haystack[midval]) {
+      maxval = midval - 1; //offset max, keeps from looping on value
+    } else if (e > haystack[midval]) {
+      minval = midval + 1; //offset min, so algortithm continues
+    } else if (e == haystack[midval]){
+      return true;
+    }
   }
-  return(false);
-  
-  // YOUR CODE GOES HERE
+  return false;
 }

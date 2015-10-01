@@ -1,6 +1,6 @@
 
 void setup() {
-  int seed = 77; // TRY DIFFERENT SEED VALUES
+  int seed = 0; // TRY DIFFERENT SEED VALUES
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
@@ -9,7 +9,7 @@ void setup() {
   println("Search haystack " + t_count + " times.");
   
   for(int i=0; i<t_count; i++) {
-    int haystack[] = generateHaystack(10000, seed);
+    int haystack[] = generateHaystack(100000, seed);
   
     long t = System.nanoTime();
     bubbleHaystack(haystack);
