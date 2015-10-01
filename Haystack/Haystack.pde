@@ -1,10 +1,10 @@
 
 void setup() {
-  int seed = 1; // TRY DIFFERENT SEED VALUES
+  int seed = 3; // TRY DIFFERENT SEED VALUES
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
-  int t_count = 3; // increase for greater accuracy at a trade off of time
+  int t_count = 1; // increase for greater accuracy at a trade off of time
   
   println("Search haystack " + t_count + " times.");
   
@@ -12,7 +12,7 @@ void setup() {
     int haystack[] = generateHaystack(10000000, seed);
   
     long t = System.nanoTime();
-    sortHaystack(haystack);
+    //bubbleHaystack(haystack);
     found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
@@ -60,7 +60,7 @@ void bubbleHaystack(int[] haystack) {
 }
 void countSort(int[] arr, int n, int exp)
 {
-  int[] count = new int[n+1];
+  int[] count = new int[10];
   int[] output = new int[n];
   
   int i = 0;
@@ -68,7 +68,7 @@ void countSort(int[] arr, int n, int exp)
   for(i = 0; i < n; ++i)
     ++count[(arr[i] / exp) % 10];
     
-  for (i = 1; i <= n; ++i)
+  for (i = 1; i <= 9; ++i)
     count[i] += count[i-1];
     
   for (i = n - 1; i >= 0; --i)
