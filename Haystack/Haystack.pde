@@ -4,13 +4,12 @@ void setup() {
   
   boolean found_the_needle = false; // assume you won't find the number     
   long t_sum = 0;
-  int t_count = 4; // increase for greater accuracy at a trade off of time
+  int t_count = 10; // increase for greater accuracy at a trade off of time
   
   println("Search haystack " + t_count + " times.");
   
   for(int i=0; i<t_count; i++) {
     int haystack[] = generateHaystack(10000000, seed);
-    thread("sortHaystack(int[] haystack)");
     long t = System.nanoTime();
     sortHaystack(haystack);
     found_the_needle = binarySearch(42, haystack); // deep philosophical search...
