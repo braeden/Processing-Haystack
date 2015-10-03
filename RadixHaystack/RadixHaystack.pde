@@ -81,7 +81,7 @@ boolean binarySearch(int e, int[] haystack) {
   while (a <= c) {
     b = (c+a)/2;
     if (e < haystack[b]) { c = b - 1; } 
-    else if (e > haystack[b]) { a = a + 1; }
+    else if (e > haystack[b]) { a = b + 1; }
     else if (e == haystack[b]){ return true; }
   }
   return false;
