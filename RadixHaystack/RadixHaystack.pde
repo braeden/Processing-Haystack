@@ -79,7 +79,7 @@ void sortHaystack(int[] haystack)
 
 boolean binarySearch(int e, int[] haystack) {
   int a = 0;
-  int c = 999999;
+  int c = 10000000;
   int b;
   while (a <= c) {
     b = (c+a)/2;
