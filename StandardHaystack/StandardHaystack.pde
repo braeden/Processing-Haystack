@@ -60,7 +60,7 @@ void bubbleHaystack(int[] haystack) {
 boolean binarySearch(int e, int[] haystack) {
   println("Searching..."); //Wrote recursivley, proccessing couldn't deal with so many self calls.
   int minval = 0;
-  int maxval = haystack.length-1;
+  int maxval = haystack.length;
   while (minval <= maxval) {
     int midval = (maxval+minval)/2;
     if (e < haystack[midval]) {
