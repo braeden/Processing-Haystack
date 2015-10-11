@@ -14,7 +14,6 @@ void setup() {
     long t = System.nanoTime();
     bubbleHaystack(haystack);
     found_the_needle = binarySearch(42, haystack); //Binary Search for 42
-    //found_the_needle = searchHaystack(42, haystack); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
     if(i >= 3) // the earlier times are sometimes corrupted by memory mamangement and system processes

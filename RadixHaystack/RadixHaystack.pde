@@ -11,11 +11,9 @@ void setup() {
   for(int i=0; i<t_count; i++) {
     
     int haystack[] = generateHaystack(10000000, seed);
-    sortHaystack(haystack);
-     
     long t = System.nanoTime();
- 
-    found_the_needle = binarySearch(42, haystack); // deep philosophical search...
+    sortHaystack(haystack);
+    found_the_needle = binarySearch(42, haystack, 0, haystack.length); // deep philosophical search...
     long del = System.nanoTime() - t;
     println("Done searching in " + str(del/1000) + " microseconds.");
     if(i >= 3) // the earlier times are sometimes corrupted by memory mamangement and system processes
@@ -75,7 +73,23 @@ void sortHaystack(int[] haystack)
   for (int e = 1; max/e > 0; e *= 10)
     countSort(haystack, max, e);
 }
-
+//Recursive Binary Search
+boolean binarySearch(int e, int[] haystack, int minval, int maxval) {
+  int midval = (maxval+minval)/2;
+  if (minval > maxval) {
+    return false;
+  } else {
+    if (e < haystack[midval]) {
+      return binarySearch(e, haystack, minval, midval-1);
+    } else
+    if (e > haystack[midval]) {
+      return binarySearch(e, haystack, midval+1, maxval); //Took forever to realize it has to return the function call.
+    } else {
+      return true;
+    }
+  }
+}
+/*
 
 boolean binarySearch(int e, int[] haystack) {
   int a = 0;
@@ -89,3 +103,4 @@ boolean binarySearch(int e, int[] haystack) {
   }
   return false;
 }
+*/
